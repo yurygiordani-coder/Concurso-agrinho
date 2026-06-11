@@ -4,21 +4,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.querySelector(".menu-toggle");
     const navMenu = document.querySelector(".nav-menu");
 
-    menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-        // Alterna o ícone entre o "hambúrguer" e o "X" de fechar
-        menuToggle.textContent = navMenu.classList.contains("active") ? "✕" : "☰";
-    });
-
-    // Fecha o menu ao clicar em qualquer link (melhor experiência do usuário)
-    const navLinks = document.querySelectorAll(".nav-menu a");
-    navLinks.forEach(link => {
-        link.addEventListener("click", () => {
-            navMenu.classList.remove("active");
-            menuToggle.textContent = "☰";
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener("click", () => {
+            navMenu.classList.toggle("active");
+            menuToggle.textContent = navMenu.classList.contains("active") ? "✕" : "☰";
         });
-    });
 
+        const navLinks = document.querySelectorAll(".nav-menu a");
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                navMenu.classList.remove("active");
+                menuToggle.textContent = "☰";
+            });
+        });
+    }
 
     // --- 2. CONTADOR ANIMADO ---
     const counters = document.querySelectorAll(".counter");
@@ -28,8 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const updateCount = () => {
                 const target = +counter.getAttribute("data-target");
                 const count = +counter.innerText;
-                
-                // Velocidade da animação (ajuste o divisor se quiser mais rápido/lento)
                 const speed = target / 100; 
 
                 if (count < target) {
@@ -43,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-
     // --- 3. EFEITO DE REVELAÇÃO AO ROLAR A PÁGINA (SCROLL REVEAL) ---
     const revealElements = document.querySelectorAll(".scroll-reveal");
     const impactSection = document.querySelector("#impacto");
@@ -52,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const checkScroll = () => {
         const triggerBottom = window.innerHeight * 0.85;
 
-        // Verifica elementos para revelar na tela
         revealElements.forEach(el => {
             const elTop = el.getBoundingClientRect().top;
             if (elTop < triggerBottom) {
@@ -60,17 +55,48 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Verifica se a seção de impacto apareceu para iniciar os números
         if (impactSection) {
             const sectionTop = impactSection.getBoundingClientRect().top;
             if (sectionTop < triggerBottom && !counterStarted) {
                 startCounters();
-                counterStarted = true; // Garante que roda apenas uma vez
+                counterStarted = true; 
             }
         }
     };
 
-    // Executa uma vez ao carregar a página e depois sempre que houver scroll
     window.addEventListener("scroll", checkScroll);
     checkScroll(); 
+
+    // --- 4. ABAS EXPANSÍVEIS (PILARES) ---
+    const cardsExpandiveis = document.querySelectorAll(".card.expandivel");
+
+    cardsExpandiveis.forEach(card => {
+        card.addEventListener("click", () => {
+            const estaAtivo = card.classList.contains("aberto");
+            
+            // Fecha outros cards abertos (foco único)
+            cardsExpandiveis.forEach(c => {
+                c.classList.remove("aberto");
+                c.setAttribute("aria-expanded", "false");
+                const icone = c.querySelector(".icone-expandir");
+                if (icone) icone.textContent = "+";
+            });
+
+            // Se não estava aberto, abre o atual
+            if (!estaAtivo) {
+                card.classList.add("aberto");
+                card.setAttribute("aria-expanded", "true");
+                const icone = card.querySelector(".icone-expandir");
+                if (icone) icone.textContent = "−";
+            }
+        });
+
+        // Suporte a acessibilidade via teclado
+        card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                card.click();
+            }
+        });
+    });
 });
