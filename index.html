@@ -12,13 +12,14 @@
         <div class="container nav-container">
             <div class="logo">Agro<span>Sustentável</span></div>
             <nav aria-label="Navegação principal">
-                <ul>
+                <ul class="nav-menu">
                     <li><a href="#inicio">Início</a></li>
                     <li><a href="#pilares">Pilares</a></li>
                     <li><a href="#tecnologia">Tecnologia</a></li>
                     <li><a href="#sobre">Sobre Nós</a></li>
                 </ul>
             </nav>
+            <button class="menu-toggle" aria-label="Abrir menu">☰</button>
         </div>
     </header>
 
@@ -35,18 +36,55 @@
             <div class="container">
                 <h2 class="section-title">O Equilíbrio em Prática</h2>
                 <div class="grid-3">
-                    <article class="card">
-                        <h3>Produção Eficiente</h3>
-                        <p>Uso de técnicas avançadas para maximizar a colheita por hectare, reduzindo a necessidade de expansão territorial e protegendo biomas nativos.</p>
+                    
+                    <article class="card expandivel" role="button" aria-expanded="false" tabindex="0">
+                        <div class="card-header">
+                            <h3>Produção Eficiente</h3>
+                            <span class="icone-expandir">+</span>
+                        </div>
+                        <p class="resumo">Uso de técnicas avançadas para maximizar a colheita por hectare, reduzindo a necessidade de expansão territorial e protegendo biomas nativos.</p>
+                        <div class="conteudo-extra">
+                            <hr>
+                            <ul>
+                                <li><strong>Mapeamento por Satélite:</strong> Análise em tempo real da saúde da lavoura.</li>
+                                <li><strong>Sementes Otimizadas:</strong> Cultivos mais resistentes a pragas e variações climáticas.</li>
+                                <li><strong>Resultados:</strong> Aumento de até 25% na produtividade sem desmatar novas áreas.</li>
+                            </ul>
+                        </div>
                     </article>
-                    <article class="card">
-                        <h3>Preservação Ativa</h3>
-                        <p>Implementação de manejo de solo, rotação de culturas e recuperação de áreas degradadas para manter a terra fértil por gerações.</p>
+
+                    <article class="card expandivel" role="button" aria-expanded="false" tabindex="0">
+                        <div class="card-header">
+                            <h3>Preservação Ativa</h3>
+                            <span class="icone-expandir">+</span>
+                        </div>
+                        <p class="resumo">Implementação de manejo de solo, rotação de culturas e recuperação de áreas degradadas para manter a terra fértil por gerações.</p>
+                        <div class="conteudo-extra">
+                            <hr>
+                            <ul>
+                                <li><strong>Sistema ILPF:</strong> Integração Lavoura-Pecuária-Floresta para diversificar o ecossistema.</li>
+                                <li><strong>Plantio Direto:</strong> Cobertura de palhada que evita erosão e conserva a umidade.</li>
+                                <li><strong>Resultados:</strong> Maior fixação de carbono no solo e regeneração biológica natural.</li>
+                            </ul>
+                        </div>
                     </article>
-                    <article class="card">
-                        <h3>Gestão de Recursos</h3>
-                        <p>Sistemas inteligentes de irrigação e captação de água da chuva que evitam o desperdício e protegem nossos recursos hídricos.</p>
+
+                    <article class="card expandivel" role="button" aria-expanded="false" tabindex="0">
+                        <div class="card-header">
+                            <h3>Gestão de Recursos</h3>
+                            <span class="icone-expandir">+</span>
+                        </div>
+                        <p class="resumo">Sistemas inteligentes de irrigação e captação de água da chuva que evitam o desperdício e protegem nossos recursos hídricos.</p>
+                        <div class="conteudo-extra">
+                            <hr>
+                            <ul>
+                                <li><strong>Gotejamento Subterrâneo:</strong> Água direto na raiz, reduzindo evaporação indesejada.</li>
+                                <li><strong>Sensores Hidrométricos:</strong> Irrigação acionada apenas quando o solo pede água.</li>
+                                <li><strong>Resultados:</strong> Economia de até 40% no consumo geral de recursos hídricos.</li>
+                            </ul>
+                        </div>
                     </article>
+
                 </div>
             </div>
         </section>
@@ -71,5 +109,6 @@
         </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
