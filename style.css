@@ -2,26 +2,22 @@
    1. VARIÁVEIS DO PROJETO (DESIGN SYSTEM)
    ========================================================================== */
 :root {
-    /* Cores Principais */
     --primary-color: #2e7d32;     /* Verde Agro */
     --primary-dark: #1b5e20;      /* Verde Escuro */
     --primary-light: #81c784;     /* Verde Claro */
     --accent-color: #f57c00;      /* Laranja Terra (Destaque/Inovação) */
     
-    /* Cores Neutras */
     --text-color: #333333;
     --text-muted: #555555;
     --bg-main: #fcfcfc;
     --bg-card: #ffffff;
     --bg-light: #f4f7f4;
     
-    /* Transições e Sombras */
     --transition-fast: 0.3s ease;
     --transition-smooth: 0.8s cubic-bezier(0.25, 1, 0.5, 1);
     --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
     --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
     
-    /* Espaçamentos e Bordas */
     --radius-md: 8px;
     --radius-lg: 15px;
 }
@@ -54,7 +50,7 @@ body {
 }
 
 .section-padding {
-    padding: 100px 0; /* Espaçamento ligeiramente maior para respiro visual */
+    padding: 100px 0;
 }
 
 .bg-light {
@@ -95,7 +91,6 @@ header {
     color: var(--primary-light);
 }
 
-/* Menu Normal (Desktop) */
 .nav-menu {
     display: flex;
     list-style: none;
@@ -116,7 +111,6 @@ header {
     transition: color var(--transition-fast);
 }
 
-/* Linha decorativa animada no hover do menu */
 .nav-menu li a::after {
     content: '';
     position: absolute;
@@ -136,7 +130,6 @@ header {
     width: 100%;
 }
 
-/* Botão de Menu Hambúrguer (Escondido por padrão no Desktop) */
 .menu-toggle {
     display: none;
     background: none;
@@ -155,7 +148,7 @@ header {
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), 
                 url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
-    height: 85vh; /* Aumentado para maior imponência inicial */
+    height: 85vh;
     display: flex;
     align-items: center;
     color: #ffffff;
@@ -188,7 +181,7 @@ header {
     color: #fff;
     padding: 16px 40px;
     text-decoration: none;
-    border-radius: 30px; /* Bordas arredondadas modernas */
+    border-radius: 30px;
     font-weight: 700;
     text-transform: uppercase;
     font-size: 14px;
@@ -215,7 +208,6 @@ header {
     position: relative;
 }
 
-/* Marcador visual verde embaixo dos títulos */
 .section-title::after {
     content: '';
     display: block;
@@ -233,7 +225,7 @@ header {
 }
 
 /* ==========================================================================
-   6. SEÇÃO DE BLOCOS (CARDS EXPANDIDOS)
+   6. SEÇÃO DE BLOCOS (CARDS EXPANDIDOS E INTERATIVOS)
    ========================================================================== */
 .card {
     background: var(--bg-card);
@@ -249,16 +241,85 @@ header {
     box-shadow: var(--shadow-md);
 }
 
-.card h3 {
+.card.expandivel {
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-top-color var(--transition-fast);
+    overflow: hidden;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
+}
+
+.card-header h3 {
     color: var(--primary-dark);
     font-size: 22px;
     font-weight: 700;
 }
 
-.card p {
+.icone-expandir {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    transition: transform var(--transition-fast);
+}
+
+.card p.resumo {
     color: var(--text-muted);
     font-size: 15px;
+}
+
+/* Conteúdo recolhido das Abas */
+.conteudo-extra {
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.4s ease-out, opacity 0.3s ease;
+}
+
+.conteudo-extra hr {
+    border: 0;
+    height: 1px;
+    background: #e3ece3;
+    margin: 20px 0;
+}
+
+.conteudo-extra ul {
+    list-style: none;
+}
+
+.conteudo-extra li {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 18px;
+}
+
+.conteudo-extra li::before {
+    content: "•";
+    color: var(--accent-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* Modificadores do Estado Aberto */
+.card.expandivel.aberto {
+    border-top-color: var(--accent-color);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.card.expandivel.aberto .conteudo-extra {
+    max-height: 350px; /* Margem limite de expansão segura */
+    opacity: 1;
+    visibility: visible;
 }
 
 /* ==========================================================================
@@ -292,14 +353,12 @@ header {
 blockquote {
     font-style: italic;
     border-left: 4px solid var(--primary-light);
-    padding-left: 20px;
+    padding: 15px 20px;
     color: var(--primary-dark);
     font-weight: 600;
     font-size: 18px;
     margin: 30px 0;
     background-color: rgba(129, 199, 132, 0.1);
-    padding-top: 15px;
-    padding-bottom: 15px;
     border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
@@ -308,7 +367,6 @@ blockquote {
     min-width: 350px;
 }
 
-/* Evolução do placeholder cinza para um container com imagem real e moderna */
 .image-box {
     background: linear-gradient(rgba(46, 125, 50, 0.15), rgba(0, 0, 0, 0.5)), 
                 url('https://images.unsplash.com/photo-1592417817098-8f3d6eb18865?auto=format&fit=crop&w=800&q=80') no-repeat center center/cover;
@@ -330,7 +388,7 @@ blockquote {
 }
 
 /* ==========================================================================
-   8. NOVA SEÇÃO DE IMPACTO (ESTILIZAÇÃO DOS CONTADORES DO JS)
+   8. NOVA SEÇÃO DE IMPACTO (CONTADORES)
    ========================================================================== */
 .counter-box {
     background-color: var(--bg-card);
@@ -362,7 +420,7 @@ blockquote {
 .counter-suffix {
     font-size: 32px;
     font-weight: 700;
-    color: var(--accent-color); /* Laranja destaca os símbolos %, + ou k */
+    color: var(--accent-color);
     margin-left: 2px;
 }
 
@@ -374,7 +432,7 @@ blockquote {
 }
 
 /* ==========================================================================
-   9. ANIMAÇÕES DO SCROLL REVEAL (CONEXÃO DIRETA COM O JS)
+   9. ANIMAÇÕES DO SCROLL REVEAL
    ========================================================================== */
 .scroll-reveal {
     opacity: 0;
@@ -383,13 +441,11 @@ blockquote {
     will-change: transform, opacity;
 }
 
-/* Classe de gatilho injetada dinamicamente via script.js */
 .scroll-reveal.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Atrasos em cascata para grids ordenados parecerem mais naturais */
 .grid-3 > .card:nth-child(1), .grid-3 > .counter-box:nth-child(1) { transition-delay: 0.1s; }
 .grid-3 > .card:nth-child(2), .grid-3 > .counter-box:nth-child(2) { transition-delay: 0.2s; }
 .grid-3 > .card:nth-child(3), .grid-3 > .counter-box:nth-child(3) { transition-delay: 0.3s; }
@@ -426,9 +482,8 @@ footer p {
         padding: 70px 0;
     }
 
-    /* Transformação da barra de navegação para Menu Mobile Hambúrguer */
     .menu-toggle {
-        display: block; /* Revela o botão */
+        display: block;
     }
 
     .nav-menu {
@@ -440,15 +495,14 @@ footer p {
         left: 0;
         background-color: #ffffff;
         padding: 0;
-        max-height: 0; /* Escondido por padrão usando transição de altura */
+        max-height: 0;
         overflow: hidden;
         box-shadow: 0 15px 20px rgba(0,0,0,0.08);
         transition: max-height var(--transition-fast), padding var(--transition-fast);
     }
 
-    /* Estado ativo acionado via JavaScript */
     .nav-menu.active {
-        max-height: 350px; /* Expande suavemente */
+        max-height: 350px;
         padding: 20px 0;
     }
 
@@ -458,11 +512,10 @@ footer p {
         width: 100%;
     }
     
-    .nav-menu li margin-left {
+    .nav-menu li:first-child {
         margin-left: 0;
     }
 
-    /* Ajustes estruturais de seções */
     .hero {
         height: 75vh;
     }
